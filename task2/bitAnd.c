@@ -1,4 +1,4 @@
-int bitAnd(int a,int b)
+int bitAnd(int a, int b)
 {
-    return (~(~a|~b));
+    return (~(~a | ~b));
 }
