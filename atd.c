@@ -8,12 +8,9 @@ typedef struct lol
     struct lol* par;
 } lol;
 
-lol head;
-int size;
 
 lol* findval(int x,lol* tmp)
 {
-    if (size == 0) return;
     if (tmp == NULL)
     {
         return NULL;
@@ -32,13 +29,12 @@ lol* findval(int x,lol* tmp)
         {
             return findval(x, tmp -> left);
         }
-        return NULL;
     }
 }
 
 lol* findpar(int x, lol* tmp)
 {
-    if (size == 0) return;
+    if (tmp == NULL) return;
     lol* next;
     if (x > tmp -> val)
     {
@@ -58,19 +54,28 @@ lol* findpar(int x, lol* tmp)
     }
 }
 
-void add(int x)
+void add(int x,lol** head)
 {
-    if (size == 0)
+    if (!(*head))
     {
-        head.val = x;
-        size++;
+        *head = (lol*) malloc(sizeof(lol));
+        if (!(*head))
+        {
+            printf("Not enough memory");
+            exit(1);
+        }
+        (*head) -> val = x;
+        (*head) -> left = NULL;
+        (*head) -> right = NULL;
+        (*head) -> par = NULL;
         return;
     }
-    if (findval(x, &head) == NULL)
+
+    if (findval(x, *head) == NULL)
     {
-        lol* par = findpar(x , &head);
+        lol* par = findpar(x , *head);
         lol* cur = (lol*) calloc(1,sizeof(lol));
-        if (elem == NULL)
+        if (cur == NULL)
         {
             printf("ALLAAAARM!!!!1!\a1");
             exit(-1);
@@ -86,13 +91,12 @@ void add(int x)
             par -> left = cur;
         }
     }
-    size++;
 }
 
-void pop(int x)
+void pop(int x,lol** head)
 {
-    if (size == 0) return;
-    lol* cur = findval(x,&head);
+    if (!(*head)) return;
+    lol* cur = findval(x, *head);
     if (cur != NULL)
     {
         if (cur -> right != NULL)
@@ -115,19 +119,19 @@ void pop(int x)
         }
         else
         {
-            if (cur == &head)
+            if (cur == *head)
             {
                 if (cur -> left == NULL)
                 {
-                    size--;
+                    *head = NULL;
                     return;
                 }
                 else
                 {
-                    head.val = head.left -> val;
-                    head.right = head.left -> right;
-                    lol* del = head.left;
-                    head.left = head.left -> left;
+                    (*head) -> val = (*head) -> left -> val;
+                    (*head) -> right = (*head) -> left -> right;
+                    lol* del = (*head) -> left;
+                    (*head) -> left = (*head) -> left -> left;
                     free(del);
                 }
             }
@@ -143,14 +147,12 @@ void pop(int x)
             }
         }
     }
-    size--;
 }
 
 void printleft(lol* tmp)
 {
-    if (size == 0)
+    if (!tmp)
     {
-        printf("NULL");
         return;
     }
     if (tmp -> left != NULL)
@@ -166,9 +168,8 @@ void printleft(lol* tmp)
 
 void printright(lol* tmp)
 {
-    if (size == 0)
+    if (!tmp)
     {
-        printf("NULL");
         return;
     }
     if (tmp -> right != NULL)
@@ -184,11 +185,6 @@ void printright(lol* tmp)
 
 void print(lol* tmp)
 {
-    if (size == 0)
-    {
-        printf("NULL");
-        return;
-    }
     if (tmp == NULL)
     {
         printf("NULL");
@@ -201,25 +197,24 @@ void print(lol* tmp)
     printf(")");
 }
 
-void kek()
-{
-    head.val = 0;
-    head.right = NULL;
-    head.left = NULL;
-    head.par = NULL;
-    size = 0;
-}
-
 int main()
 {
-    kek();
+    lol* head = NULL;
     int x;
     int d;
     for (x = 0; x < 5; x++)
     {
         scanf("%d",&d);
-        add(d);
+        add(d,&head);
+
     }
-    printright(&head);
+    print(head);
+    printf("\n");
+    pop(2,&head);
+    print(head);
+    printf("\n");
+    printleft(head);
+    printf("\n");
+    printright(head);
     return 0;
 }
