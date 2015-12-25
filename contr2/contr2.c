@@ -54,6 +54,11 @@ int second(char* num1, char* num2)
 void third()
 {
     FILE* f = fopen("input.txt","r");
+    if (!f)
+    {
+        printf("Error! Can't open file");
+        exit(1);
+    }
     char a,b;
     a = 0;
     _Bool flag = 0;
