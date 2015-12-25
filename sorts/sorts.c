@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-const int num_of_tests = 9;
 const int size_of_arrays[] = {5, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
+const int num_of_tests = sizeof(size_of_arrays)/sizeof(size_of_arrays[0]);
 const int module = 100000;
 
 void count_sort(int* arr, int size)
@@ -64,7 +64,6 @@ void quick_sort(int* arr, int size)
 
 int main()
 {
-
     void (*sorts[])(int* arr,int size) = {count_sort, quick_sort, square_sort};
     size_t num_of_func = sizeof(sorts)/sizeof(sorts[0]);
     int x,y = 0;
