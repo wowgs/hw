@@ -1,0 +1,36 @@
+Constant hash
+
+Some statistic:
+Number of occupied chains - 1
+Number of words - 5792
+The average length of chain is - 5792.000000
+Maximum length of chain - 5792
+Minimum length of chain - 5792
+
+Time is - 0.390000
+
+_________________________________________________
+
+Sum Hash:
+
+Some statistic:
+Number of occupied chains - 785
+Number of words - 5792
+The average length of chain is - 7.378344
+Maximum length of chain - 38
+Minimum length of chain - 1
+
+Time is - 0.031000
+
+_________________________________________________
+
+Good Hash (HashRs)
+
+Some statistic:
+Number of occupied chains - 5634
+Number of words - 5792
+The average length of chain is - 1.028044
+Maximum length of chain - 3
+Minimum length of chain - 1
+
+Time is - 0.031000
