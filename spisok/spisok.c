@@ -5,13 +5,9 @@ typedef struct lol
     struct lol *next;
 } lol;
 
-lol head;
-lol* last = &head;
-
-int d;
-
-void a()
+lol* add(lol* head)
 {
+    int d;
     scanf ("%d",&d);
     lol *elem = (lol*) malloc(sizeof(lol));
     if (elem == NULL)
@@ -20,15 +16,16 @@ void a()
         exit(-1);
     }
     elem -> num = d;
-    elem -> next = NULL;
-    last -> next = elem;
-    last = elem;
+    elem -> next = head -> next;
+    head -> next = elem;
+
 }
 
-void r()
+lol* remove_elem(lol* head)
 {
+    int d;
     scanf ("%d",&d);
-    lol *pr = &head;
+    lol *pr = head;
     if (pr -> next != 0)
     {
         while (pr -> next -> num != d)
@@ -41,14 +38,13 @@ void r()
             lol *qwe = pr -> next -> next;
             free(pr -> next);
             pr -> next = qwe;
-            if (qwe == NULL) last = pr;
         }
     }
 }
 
-void p()
+void print(lol* head)
 {
-    lol *pr = head.next;
+    lol *pr = head -> next;
     while (pr != NULL)
     {
         printf("%d ",pr -> num);
@@ -57,9 +53,9 @@ void p()
     printf("\n");
 }
 
-void q()
+void quit(lol* head)
 {
-    lol *pr = &head;
+    lol *pr = head;
     lol *del;
     while (pr -> next != NULL)
     {
@@ -67,13 +63,20 @@ void q()
         free (pr);
         pr = del;
     }
-    free (last);
+    free(pr);
+    free(head);
     return 0;
 }
 
 void next()
 {
-    head.next = NULL;
+    lol *head = (lol*) malloc(sizeof(lol));
+    if (!head)
+    {
+        printf("Not enough memory");
+        exit(1);
+    }
+    head -> next = NULL;
     char f;
 
     scanf("%c",&f);
@@ -81,20 +84,19 @@ void next()
     {
         if (f =='a')
         {
-            a();
+            add(head);
         }
         if (f == 'r')
         {
-            r();
+            remove_elem(head);
         }
         if (f == 'p')
         {
-            p();
+            print(head);
         }
         scanf(" %c",&f);
     }
-    q();
-    return 0;
+    quit(head);
 }
 
 int find_cycle(lol *first)
@@ -118,4 +120,5 @@ int find_cycle(lol *first)
 int main()
 {
     next();
+    return 0;
 }
