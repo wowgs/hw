@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-const int size_of_arrays[9] = {5, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
+const int num_of_tests = 9;
+const int size_of_arrays[] = {5, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
 const int module = 100000;
 
 void count_sort(int* arr, int size)
@@ -63,11 +64,13 @@ void quick_sort(int* arr, int size)
 
 int main()
 {
-    void (*sorts[3])(int* arr,int size) = {count_sort, quick_sort, square_sort};
+
+    void (*sorts[])(int* arr,int size) = {count_sort, quick_sort, square_sort};
+    size_t num_of_func = sizeof(sorts)/sizeof(sorts[0]);
     int x,y = 0;
-    for (x = 0; x < 3; x++)
+    for (x = 0; x < (int) num_of_func; x++)
     {
-        for (y = 0; y < 9; y++)
+        for (y = 0; y < num_of_tests; y++)
         {
             int *a = (int*) malloc(size_of_arrays[y] * sizeof(int));
             if (a == NULL)
