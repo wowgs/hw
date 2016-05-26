@@ -1,0 +1,44 @@
+ldc 1
+st 1
+ldc 1
+st 2
+ldc 2000000
+st 0
+ldc 0
+st 7
+cl: ld 1
+ld 2
+st 1
+ld 1
+add
+st 2
+ld 2
+ld 0
+cmp
+ldc -1
+cmp
+br mod2
+ld 7
+ret
+mod2: ld 2
+st 4 
+mod: st 404
+ld 4
+ldc -2
+add
+st 4
+ld 4
+ldc 0
+cmp
+br next
+ld 7
+ld 2
+add
+st 7
+st 404
+jmp cl
+next: ldc 1
+cmp
+br mod
+st 404
+jmp cl
