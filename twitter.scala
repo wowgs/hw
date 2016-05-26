@@ -178,7 +178,7 @@ object twister extends App{
 
     def descendingByRetweet : TweetList = {
       val most = this.mostRetweeted
-      Cons(most, remove(this.mostRetweeted).descendingByRetweet)
+      Cons(most, remove(most).descendingByRetweet)
     }
 
     def mostRetweeted : Tweet = {
