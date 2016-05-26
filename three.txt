@@ -1,0 +1,75 @@
+ldc 10001
+st 0
+ldc 1
+st 4
+ldc 3
+st 1
+ld 0
+ld 4
+cmp
+br not1st
+ldc 2
+ret
+not1st: ld 4
+ldc 1
+add
+st 4
+ld 0
+ld 4
+cmp
+br else
+ldc 3
+ret
+else: ld 4
+ld 0
+cmp
+br nxt
+jmp end
+nxt: ld 1
+ldc 2
+add
+st 1
+ldc 3
+st 7
+ld 4
+ld 0
+cmp
+ldc -1
+cmp
+br modX
+end: ld 2
+ret
+modX: st 404
+ld 1
+st 6
+mod: st 404
+ld 7
+ld 6
+sub
+st 6
+ld 6
+ldc 0
+cmp
+br next
+st 404
+jmp else
+next: ldc 1
+cmp
+br mod
+ld 7
+ldc 2
+add
+st 7
+ld 7
+ld 1
+cmp
+br modX
+st 404
+ld 1
+st 2
+ld 4
+ldc 1
+add
+st 4
+st 404
+jmp else
